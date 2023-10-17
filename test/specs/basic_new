@@ -1,0 +1,439 @@
+//const assert = require('assert')
+//const { clearScreenDown } = require('readline')
+const loginPage = require('../pageobjects/login.page.js')
+//const data = require('../src/utils/const')
+
+describe('auth form',  () => {
+    
+	it('Test #2 - should demonstrate Login page with wrong user name test ', async () => {
+        await loginPage.open();
+		//await loginPage.fillUserName(data.wrongUserName);
+		await loginPage.fillUserName('standarD_user');
+		//await loginPage.fillPassword(data.purePassword);
+		await loginPage.fillPassword('secret_sauce');
+		await loginPage.clickLoginBtn(); 
+		
+		//await loginPage.checkErrorMessage(data.errorLogin) 
+		await loginPage.checkErrorMessage('Epic sadface: Username and password do not match any user in this service')
+		
+	})	
+	it('Test #3 - should demonstrate Login page with wrong password ', async () => {
+        await loginPage.open();
+		await loginPage.fillUserName('standard_user');
+		await loginPage.fillPassword('secret_sauce1');
+		await loginPage.clickLoginBtn();
+		//await loginPage.checkErrorMessage(data.errorLogin) 
+		await loginPage.checkErrorMessage('Epic sadface: Username and password do not match any user in this service')
+	})	
+	it('Test #1 - should demonstrate Login page with wrong password ', async () => {
+        await loginPage.open();
+		await loginPage.fillUserName('standard_user');
+		await loginPage.fillPassword('secret_sauce');
+		await loginPage.clickLoginBtn();
+		//await expect(elem).toExist()
+		await loginPage.checkExpectUrl('Swag Labs')
+		//await loginPage.checkExistElem ('burgerMenu', "$('#react-burger-menu-btn')" ) 
+		
+	})
+
+	it('Test #4 - should demonstrate Login page with wrong password ', async () => {
+        await loginPage.open();
+		await loginPage.login('standard_user', 'secret_sauce');
+		//await loginPage.fillPassword('secret_sauce');
+		//await loginPage.clickLoginBtn();
+		//await expect(elem).toExist()
+		await loginPage.checkExpectUrl('Swag Labs')
+		//await loginPage.checkExistElem ('burgerMenu', "$('#react-burger-menu-btn')" ) 
+		
+	})
+	it('Test #4 - should demonstrate Login page with wrong password ', async () => {
+        await loginPage.open();
+		await loginPage.login('standard_user', 'secret_sauce');
+		//await loginPage.fillPassword('secret_sauce');
+		//await loginPage.clickLoginBtn();
+		//await expect(elem).toExist()
+		await loginPage.checkExpectUrl('Swag Labs')
+		//await loginPage.checkExistElem ('burgerMenu', "$('#react-burger-menu-btn')" ) 
+		
+	})
+
+
+		
+		
+xit('Test #1 - should demonstrate Login page with wrong user name test ', async () => {		
+		
+		await browser.url('https://www.saucedemo.com');
+		const input= $('#user-name');
+		let attr = await input.getAttribute('name');
+		console.log('Title attribute is ' + attr)
+		await input.setValue('standard_user')
+		attr = await input.getValue('value')
+		console.log('Value attribute is ' + attr)
+		const input1= $('#password');
+		let attr1 = await input1.getAttribute('name');
+		console.log('Title attribute is ' + attr1)
+		await input1.setValue('secret_sauce')
+		attr1 = await input1.getValue('value')
+		console.log('Value attribute is ' + attr1)
+		const input2= $('#login-button');
+		let attr2 = await input1.getAttribute('name');
+		console.log('Title attribute is ' + attr2)
+		attr2 = await input2.getValue('value')
+		console.log('Value attribute is ' + attr2)
+		input2.click()
+		await browser.pause(2000)
+		console.log('Stand on ' + await browser.getUrl())
+	})
+
+	xit('should demonstrate Login page with true login and wrong password - test #2', async () => {
+        await browser.url('https://www.saucedemo.com');
+		const input= $('#user-name');
+		let attr = await input.getAttribute('name');
+		console.log('Title attribute is ' + attr)
+		await input.setValue('standard_user')
+		attr = await input.getValue('value')
+		console.log('Value attribute is ' + attr)
+		const input1= $('#password');
+		let attr1 = await input1.getAttribute('name');
+		console.log('Title attribute is ' + attr1)
+		await input1.setValue('secret_sauce1')
+		attr1 = await input1.getValue('value')
+		console.log('Value attribute is ' + attr1)
+		const input2= $('#login-button');
+		let attr2 = await input1.getAttribute('name');
+		console.log('Title attribute is ' + attr2)
+		attr2 = await input2.getValue('value')
+		console.log('Value attribute is ' + attr2)
+		input2.click()
+		await browser.saveScreenshot('./screenshot_err_pass.png');
+		await browser.pause(4000);
+	})
+	
+	xit('should demonstrate Login page with wrong login and true password - test #3', async () => {
+        await browser.url('https://www.saucedemo.com');
+		const input= $('#user-name');
+		let attr = await input.getAttribute('name');
+		console.log('Title attribute is ' + attr)
+		await input.setValue('standarD_user')
+		attr = await input.getValue('value')
+		console.log('Value attribute is ' + attr)
+		const input1= $('#password');
+		let attr1 = await input1.getAttribute('name');
+		console.log('Title attribute is ' + attr1)
+		await input1.setValue('secret_sauce')
+		attr1 = await input1.getValue('value')
+		console.log('Value attribute is ' + attr1)
+		const input2= $('#login-button');
+		let attr2 = await input1.getAttribute('name');
+		console.log('Title attribute is ' + attr2)
+		attr2 = await input2.getValue('value')
+		console.log('Value attribute is ' + attr2)
+		input2.click()
+		await browser.saveScreenshot('./screenshot_err_user.png');
+		await browser.pause(4000);
+
+	})
+	xit('should demonstrate Logout from Burger - test #4', async () => {
+        await browser.url('https://www.saucedemo.com');
+		const input= $('#user-name');
+		await input.setValue('standard_user')
+		const input1= $('#password');
+		await input1.setValue('secret_sauce')
+		const input2= $('#login-button');
+		input2.click()
+		const input3= $('#react-burger-menu-btn')
+		input3.click()
+		const input_=$('#inventory_sidebar_link')
+		isDisplayed = await input_.isDisplayed()
+		all_items_but = await input_.getText()
+		console.log("TEXT" + await input_.getText() + ' ')
+		console.log('The ' + await input_.getText() + ' is displayed  ' + isDisplayed)
+		input4= $('#logout_sidebar_link')
+		input4.click()
+		await browser.saveScreenshot('./screenshot_logout.png');
+		await browser.pause(4000);
+	})
+	xit('should demonstrate Add card, Logout  and Login and Torn Cart - test #5 ', async () => {
+        await browser.url('https://www.saucedemo.com');
+		const input= $('#user-name');
+		await input.setValue('standard_user')
+		const input1= $('#password');
+		await input1.setValue('secret_sauce')
+		const input2= $('#login-button');
+		input2.click()
+		browser.pause(1000)
+		const input5= $('#add-to-cart-sauce-labs-backpack')
+		input5.click()
+		browser.pause(4000)
+		await browser.saveScreenshot('./screenshot_add_to_card.png');
+		browser.pause(4000)
+		const input3= $('#react-burger-menu-btn')
+		input3.click()
+		input4= $('#logout_sidebar_link')
+		input4.click()
+		await browser.pause(4000);
+		await browser.saveScreenshot('./screenshot_logout.png');
+		await browser.pause(4000);
+		
+		await input.setValue('standard_user')
+		await input1.setValue('secret_sauce')
+		const inputn= $('#login-button');
+		inputn.click()
+
+		await browser.pause(1000);
+		const container = $('#shopping_cart_container');
+		const link = container.$('.shopping_cart_link');
+		const badge = link.$('.shopping_cart_badge')
+		
+		console.log('Volume badge' + await badge.getText())
+
+		link.click();
+
+		await browser.pause(4000)
+		await browser.saveScreenshot('./screenshot_login_after_logout.png');
+		await browser.pause(4000)
+		let isDisable1 = $('#remove-sauce-labs-backpack')
+		isDisable1.click()
+
+	})
+
+	xit('should demonstrate 4 sorts  - test #6', async () => {
+        await browser.url('https://www.saucedemo.com');
+		const input= $('#user-name');
+		await input.setValue('standard_user')
+		const input1= $('#password');
+		await input1.setValue('secret_sauce')
+		const input2= $('#login-button');
+		await input2.click()
+		const input5= $('#add-to-card-sauce-labs-backpark')
+		input5.click()
+		const input3= $('#react-burger-menu-btn')
+		input3.click()
+		await browser.pause(4000);
+		await browser.saveScreenshot('./screenshot_bureger_click.png');
+		await browser.pause(4000);
+		input4= $('#logout_sidebar_link')
+		input4.click()
+		await browser.pause(4000);
+		await browser.saveScreenshot('./screenshot_logout.png');
+		await browser.pause(4000);
+		const selectElement = $('.product_sort_container');
+	
+		console.log('Optionsss', await selectElement.$$('option').length);
+		const options =  selectElement.$$('option');
+		for (const option of options) {
+			await browser.pause(1000);
+			console.log('Element # '+ option)
+			option.click();
+			console.log('click!!!');
+			await browser.pause(1000);
+		}
+
+
+	})
+
+	xit('should demonstrate GitHub, Facebook, Linkedin - test #7', async () => {
+        await browser.url('https://www.saucedemo.com');
+		const input= $('#user-name');
+		let attr = await input.getAttribute('name');
+		console.log('Title attribute is ' + attr)
+		await input.setValue('standard_user')
+		attr = await input.getValue('value')
+		console.log('Value attribute is ' + attr)
+		const input1= $('#password');
+		let attr1 = await input1.getAttribute('name');
+		console.log('Title attribute is ' + attr1)
+		await input1.setValue('secret_sauce')
+		attr1 = await input1.getValue('value')
+		console.log('Value attribute is ' + attr1)
+		const input2= $('#login-button');
+		let attr2 = await input1.getAttribute('name');
+		console.log('Title attribute is ' + attr2)
+		attr2 = await input2.getValue('value')
+		console.log('Value attribute is ' + attr2)
+		input2.click()
+		await browser.pause(10000)
+		const url_stand = await browser.getUrl();
+		console.log('Stand on ' + url_stand);
+
+		const TwitBut = $('footer [href="https://twitter.com/saucelabs"]');
+		await browser.pause(2000);
+		TwitBut.scrollIntoView();
+		await browser.pause(2000);
+		TwitBut.click();
+		await browser.pause(2000);
+		const twitter_stand = await browser.getUrl();
+		console.log('Stand on ' + url_stand);
+		console.log('Stand on new window ' + twitter_stand);
+		await browser.pause(2000);
+		await browser.saveScreenshot('./screenshot_Twitter_page.png');
+		await browser.switchWindow(url_stand)
+		await browser.pause(2000)
+		console.log('Stand on old window ' + await browser.getUrl())
+
+		const facebBut = $('footer [href="https://www.facebook.com/saucelabs"]');
+		await browser.pause(2000)
+		facebBut.scrollIntoView()
+		await browser.pause(2000)
+		facebBut.click()
+		await browser.pause(2000)
+		console.log('Stand on new window ' + await browser.getUrl())
+		await browser.pause(2000)
+		await browser.saveScreenshot('./screenshot_Facebook_page.png');
+		await browser.switchWindow(url_stand)
+		await browser.pause(2000)
+		console.log('Stand on old window ' + await browser.getUrl())
+
+		const linkDn = $('footer [href="https://www.linkedin.com/company/sauce-labs/"]');
+		await browser.pause(2000)
+		linkDn.scrollIntoView()
+		await browser.pause(2000)
+		linkDn.click()
+		await browser.saveScreenshot('./screenshot_LinkeDin_page.png');
+		await browser.pause(2000)
+		console.log('Stand on new window ' + await browser.getUrl())
+		await browser.pause(2000)
+		//await browser.saveScreenshot('./screenshot_LinkeDin_page.png');
+		await browser.switchWindow(url_stand)
+		await browser.pause(2000)
+		console.log('Stand on old window ' + await browser.getUrl())
+
+	})
+
+	xit('should demonstrate placing an order - test #8' , async () => {
+        await browser.url('https://www.saucedemo.com');
+		const input= $('#user-name');
+		await input.setValue('standard_user')
+		const input1= $('#password');
+		await input1.setValue('secret_sauce')
+		const input2= $('#login-button');
+		input2.click()
+		browser.pause(1000)
+		const input5= $('#add-to-cart-sauce-labs-backpack')
+		input5.click()
+		browser.pause(4000)
+		await browser.saveScreenshot('./screenshot_add_to_card.png');
+		browser.pause(4000)
+			
+		
+		const container = $('#shopping_cart_container');
+		const link = container.$('.shopping_cart_link');
+		const badge = link.$('.shopping_cart_badge')
+		
+		console.log('Volume badge' + await badge.getText())
+
+		link.click();
+
+		const chkoutBtn =$('#checkout')
+		chkoutBtn.click()
+		const fst_name = $('#first-name')
+		await fst_name.setValue('First Name')
+		const last_name = $('#last-name')
+		await last_name.setValue('Second Name')
+		const zipC = $('#postal-code')
+		await zipC.setValue('76551')
+
+		const conti = $('#continue')
+		conti.click()
+
+		const finish = $('#finish')
+		finish.click()
+		
+		const back = $('#back-to-products')
+		back.click()
+
+				
+		console.log('Volume badge' + await badge.getText())
+
+
+		
+
+	})
+	xit('should demonstrate placing an order - test #9' , async () => {
+        await browser.url('https://www.saucedemo.com');
+		const input= $('#user-name');
+		await input.setValue('standard_user')
+		const input1= $('#password');
+		await input1.setValue('secret_sauce')
+		const input2= $('#login-button');
+		input2.click()
+		browser.pause(1000)
+		
+		await browser.saveScreenshot('./screenshot_add_to_card.png');
+		browser.pause(4000)
+			
+		
+		const container = $('#shopping_cart_container');
+		const link = container.$('.shopping_cart_link');
+		const badge = link.$('.shopping_cart_badge')
+		
+		//*console.log('Volume badge' + await badge.getText())
+
+		link.click();
+
+		const chkoutBtn =$('#checkout')
+		chkoutBtn.click()
+		await browser.saveScreenshot('./screenshot_EmptyCartCheck.png');
+		const fst_name = $('#first-name')
+		await fst_name.setValue('First Name')
+		const last_name = $('#last-name')
+		await last_name.setValue('Second Name')
+		const zipC = $('#postal-code')
+		await zipC.setValue('76551')
+
+		const conti = $('#continue')
+		conti.click()
+		await browser.saveScreenshot('./screenshot_EmptyCartCont.png');
+		const finish = $('#finish')
+		finish.click()
+		await browser.saveScreenshot('./screenshot_EmptyCartFinish.png');
+		const back = $('#back-to-products')
+		back.click()
+		await browser.saveScreenshot('./screenshot_EmptyCartBack.png');
+				
+		//console.log('Volume badge' + await badge.getText())
+
+
+		
+
+	})
+	xit('should demonstrate placing an order - test #10' , async () => {
+        await browser.url('https://www.saucedemo.com');
+		const input= $('#user-name');
+		await input.setValue('standard_user')
+		const input1= $('#password');
+		await input1.setValue('secret_sauce')
+		const input2= $('#login-button');
+		input2.click()
+		browser.pause(1000)
+		
+		await browser.saveScreenshot('./screenshot_add_to_card.png');
+		browser.pause(4000)
+			
+		
+		const container = $('#shopping_cart_container');
+		const link = container.$('.shopping_cart_link');
+		const badge = link.$('.shopping_cart_badge')
+		
+		//console.log('Volume badge' + await badge.getText())
+
+		link.click();
+
+		const chkoutBtn =$('#checkout')
+		chkoutBtn.click()
+		await browser.saveScreenshot('./screenshot_EmptyCartCheck.png');
+		const fst_name = $('#first-name')
+		await fst_name.setValue('')
+		const last_name = $('#last-name')
+		await last_name.setValue('Second Name')
+		const zipC = $('#postal-code')
+		await zipC.setValue('76551')
+
+		const conti = $('#continue')
+		conti.click()
+		await browser.pause(10000)
+		await browser.saveScreenshot('./screenshot_EmptyFirstNameCartCont.png');
+		
+	})
+
+})
